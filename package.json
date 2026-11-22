@@ -1,0 +1,10 @@
+{
+  "name": "mine-frontend",
+  "private": true,
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/ascii-background-integration.test.mjs",
+    "test:ascii-source": "node --test tests/ascii-glyph-frames.test.mjs"
+  }
+}

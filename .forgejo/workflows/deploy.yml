@@ -1,0 +1,67 @@
+name: deploy
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: mine-platform-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: startsWith(github.server_url, 'http://10.69.0.10') || startsWith(github.server_url, 'https://git.sccl.cc')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Install static build tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          apt-get update
+          apt-get install -y ca-certificates curl xz-utils rsync
+          TOOLS="$(mktemp -d "${TMPDIR:-/tmp}/mine-frontend-tools-XXXXXX")"
+          cd "$TOOLS"
+          mkdir zine
+          curl --fail --show-error --location --proto '=https' --proto-redir '=https' -o zine.tar.xz https://github.com/kristoff-it/zine/releases/download/v0.13.0/x86_64-linux-musl.tar.xz
+          printf '%s\n' 'c250e029d978901b0c9a38eab0a860ef9db875bf686fe0f0abf61f180c280dba  zine.tar.xz' | sha256sum --check --strict
+          tar -xJf zine.tar.xz -C zine
+          echo "$TOOLS/zine" >> "$GITHUB_PATH"
+
+      - name: Build static site
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run build
+
+      - name: Publish static site
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          RELEASE="$(date -u +%Y%m%dT%H%M%S)-${GITHUB_SHA::8}"
+          [[ "$RELEASE" =~ ^[0-9]{8}T[0-9]{6}-[0-9a-f]{8}$ ]]
+          REL="/tank/sites/mine/releases/${RELEASE}"
+          PUBLIC=/tank/sites/mine/public
+          LINK="/tank/sites/mine/public.${RELEASE}.tmp"
+          if [ -e "$PUBLIC" ] && [ ! -L "$PUBLIC" ]; then
+            echo 'Refusing non-symlink public path' >&2
+            exit 1
+          fi
+          # mkdir/ln refuse collisions, including dangling symlinks.
+          mkdir -m 0755 "$REL"
+          test ! -e "$LINK"
+          test ! -L "$LINK"
+          trap 'rm -f -- "$LINK"' EXIT
+          # Copy only to a fresh release; never prune existing releases.
+          rsync -a --no-o --no-g --chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r ./public/ "$REL/"
+          ln -s "releases/${RELEASE}" "$LINK"
+          RELEASE_OWNER="$(stat -c '%u:%g' "$REL")"
+          LINK_OWNER="$(stat -c '%u:%g' "$LINK")"
+          if [ "$RELEASE_OWNER" != "$LINK_OWNER" ]; then
+            echo "Refusing static promotion: release and public symlink ownership differ" >&2
+            exit 1
+          fi
+          mv -Tf -- "$LINK" "$PUBLIC"
+          # All prior releases, including the previous public target, remain for rollback.

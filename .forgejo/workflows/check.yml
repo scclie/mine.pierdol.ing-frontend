@@ -1,0 +1,31 @@
+name: check
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Install static build tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          apt-get update
+          apt-get install -y ca-certificates curl xz-utils
+          TOOLS="$(mktemp -d "${TMPDIR:-/tmp}/mine-frontend-tools-XXXXXX")"
+          cd "$TOOLS"
+          mkdir zine
+          curl --fail --show-error --location --proto '=https' --proto-redir '=https' -o zine.tar.xz https://github.com/kristoff-it/zine/releases/download/v0.13.0/x86_64-linux-musl.tar.xz
+          printf '%s\n' 'c250e029d978901b0c9a38eab0a860ef9db875bf686fe0f0abf61f180c280dba  zine.tar.xz' | sha256sum --check --strict
+          tar -xJf zine.tar.xz -C zine
+          echo "$TOOLS/zine" >> "$GITHUB_PATH"
+
+      - name: Build static site
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run build
