@@ -135,8 +135,11 @@ document.querySelector('[data-logout]').addEventListener('click', async (event) 
 
 try {
   const current = await accountState();
-  if (!current) throw new Error('account lookup failed');
-  render(current);
+  if (current === null) {
+    location.replace('/login');
+  } else {
+    render(current);
+  }
 } catch (error) {
   showError(error, alert);
 } finally {

@@ -7,16 +7,21 @@
     <ul class="server-list" aria-label="Servers" :loop="$page.custom.get('servers')">
       <li class="server-card" data-server-id="$loop.it.get('id')">
         <ctx :if="$loop.it.get('id').eql('one-island')">
+          <div class="island-content">
+            <div class="island-text">
           <p class="island-kicker">season 0</p>
           <h3 :text="$loop.it.get('name')"></h3>
           <p :text="$loop.it.get('description')"></p>
-          <a class="island-apply" href="/login">apply to join -></a>
+          <a class="island-apply" href="/account">apply to join -></a>
           <ul class="island-facts" aria-label="facts">
-              <li>minecraft 26.3</li>
+            <li>minecraft 26.3</li>
             <li>structures enabled</li>
             <li>without privates</li>
             <li>voice chat</li>
           </ul>
+            </div>
+            <img class="island-image" src="$site.asset('images/one-island.png').link()" width="1280" height="1280" alt="ascii">
+          </div>
           <dl class="island-metrics">
             <div><dt>online</dt><dd data-island-online>—</dd></div>
             <div><dt>uptime</dt><dd><a href="https://status.sccl.cc/endpoints/games_mine-skyblock-server" target="_blank" rel="noopener noreferrer" data-island-uptime>—</a></dd></div>

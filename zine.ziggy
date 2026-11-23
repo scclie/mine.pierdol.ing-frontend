@@ -9,6 +9,7 @@
     .static_assets = [
         "css/theme.css",
         "css/layout.css",
+        "images/one-island.png",
         "js/api.js",
         "js/ascii-background.js",
         "ascii/glyph-glitch-text-frames.json",

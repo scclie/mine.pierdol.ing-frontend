@@ -162,6 +162,28 @@ dd {
   color: var(--nord4);
 }
 
+[data-server-id="one-island"] .island-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  align-items: start;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+[data-server-id="one-island"] .island-text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+[data-server-id="one-island"] .island-image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+}
+
 [data-server-id="one-island"] .island-kicker {
   margin: 0 0 0.5rem;
   color: var(--nord8);
