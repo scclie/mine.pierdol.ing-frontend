@@ -9,16 +9,16 @@
         .{
             .id = "one-island",
             .name = "one island",
-            .description = "vanilla skyblock where every player survives on one shared island.",
+            .description = "vanilla skyblock где все игроки выживают на одном острове",
             .version = "26.3",
         },
         .{
             .id = "draumur1",
             .name = "draumur",
-            .description = "vanilla smp is planned for the sift update release",
+            .description = "vanilla smp запланирован на релиз нового измерения 'the sift'",
             .version = "27.?",
         },
     ],
 },
 ---
-yet another private minecraft server built around wha the players want, applications open to everyone
+очередной приватный сервер майнкрафт, строящийся вокруг желаний игроков, с бесплатно открытыми заявками для всех.

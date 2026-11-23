@@ -16,7 +16,7 @@
   --nord13: #ebcb8b;
   --nord14: #a3be8c;
   --nord15: #b48ead;
-  --font-mono: "Space Mono", "Cascadia Mono", ui-monospace, monospace;
+  --font-mono: "Cascadia Mono", ui-monospace, monospace;
 }
 
 * {
