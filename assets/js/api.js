@@ -45,6 +45,15 @@ function renderIsland(card, server) {
   if (approved === null || (Number.isSafeInteger(approved) && approved >= 0)) {
     card.querySelector('[data-island-approved]').textContent = approved === null ? '—' : String(approved);
   }
+  const discord = stats.discord;
+  if (discord && typeof discord === 'object' && !Array.isArray(discord)) {
+    for (const field of ['online', 'members']) {
+      const count = discord[field];
+      if (count === null || (Number.isSafeInteger(count) && count >= 0)) {
+        card.querySelector(`[data-island-discord-${field}]`).textContent = count === null ? '—' : String(count);
+      }
+    }
+  }
   const seconds = stats.wipe_elapsed_seconds;
   if (seconds === null || Number.isSafeInteger(seconds)) {
     const element = card.querySelector('[data-island-wipe]');

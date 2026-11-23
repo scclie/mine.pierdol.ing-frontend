@@ -223,6 +223,45 @@ dd {
   overflow-wrap: anywhere;
 }
 
+[data-server-id="one-island"] .island-discord {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--nord3);
+}
+
+[data-server-id="one-island"] .island-discord h4 {
+  margin: 0 0 0.5rem;
+  color: var(--nord6);
+  font-size: 1rem;
+}
+
+[data-server-id="one-island"] .island-discord p {
+  margin: 0 0 0.75rem;
+  color: var(--nord4);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+}
+
+[data-server-id="one-island"] .island-discord-join {
+  display: inline-block;
+  max-width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--nord10);
+  border-radius: 0;
+  background: var(--nord10);
+  color: var(--nord6);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+[data-server-id="one-island"] .island-discord-join:hover,
+[data-server-id="one-island"] .island-discord-join:focus-visible {
+  outline: 2px solid var(--nord8);
+  outline-offset: 3px;
+}
+
 [data-server-id="one-island"] .island-metrics {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr));
   gap: 1rem;
