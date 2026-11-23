@@ -11,12 +11,58 @@ function validServers(payload) {
   });
 }
 
-async function updateServers() {
+let wipeClock = null;
+
+function formatWipe(seconds) {
+  const whole = Math.floor(Math.abs(seconds));
+  const sign = seconds < 0 && whole > 0 ? '-' : '';
+  const days = Math.floor(whole / 86400);
+  const hours = Math.floor(whole / 3600) % 24;
+  const minutes = Math.floor(whole / 60) % 60;
+  if (days) return `${sign}${days}d ${hours}h`;
+  if (hours) return `${sign}${hours}h ${minutes}m`;
+  if (minutes) return `${sign}${minutes}m ${whole % 60}s`;
+  return `${sign}${whole}s`;
+}
+
+function updateWipe() {
+  if (!wipeClock) return;
+  wipeClock.element.textContent = formatWipe(
+    wipeClock.seconds + (performance.now() - wipeClock.started) / 1000,
+  );
+}
+
+function renderIsland(card, server) {
+  card.querySelector('[data-island-online]').textContent = server.online === null ? '—' : String(server.online);
+  const stats = server.stats;
+  if (!stats || typeof stats !== 'object' || Array.isArray(stats)) return;
+
+  const uptime = stats.uptime_7d_percent;
+  if (uptime === null || (typeof uptime === 'number' && Number.isFinite(uptime) && uptime >= 0 && uptime <= 100)) {
+    card.querySelector('[data-island-uptime]').textContent = uptime === null ? '—' : `${Number(uptime.toFixed(2))}%`;
+  }
+  const approved = stats.approved_applications;
+  if (approved === null || (Number.isSafeInteger(approved) && approved >= 0)) {
+    card.querySelector('[data-island-approved]').textContent = approved === null ? '—' : String(approved);
+  }
+  const seconds = stats.wipe_elapsed_seconds;
+  if (seconds === null || Number.isSafeInteger(seconds)) {
+    const element = card.querySelector('[data-island-wipe]');
+    wipeClock = seconds === null ? null : { element, seconds, started: performance.now() };
+    if (seconds === null) element.textContent = '—';
+    else updateWipe();
+  }
+}
+
+async function updateServers(initial = false) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 10000);
   try {
     const response = await fetch('/api/v1/public/servers', {
       credentials: 'same-origin',
       headers: { Accept: 'application/json' },
       redirect: 'error',
+      signal: controller.signal,
     });
     if (!response.ok || !response.headers.get('content-type')?.includes('application/json')) return;
     const payload = await response.json();
@@ -25,6 +71,12 @@ async function updateServers() {
     for (const card of document.querySelectorAll('[data-server-id]')) {
       const server = payload.servers.find((item) => item.id === card.dataset.serverId);
       if (!server) continue;
+      if (server.id === 'one-island') {
+        renderIsland(card, server);
+        continue;
+      }
+      // one-shot behavior.
+      if (!initial) continue;
       const status = card.querySelector('[data-server-status]');
       const online = card.querySelector('[data-server-online]');
       status.textContent = server.status;
@@ -34,11 +86,17 @@ async function updateServers() {
         : `${server.online} ${server.online === 1 ? 'player' : 'players'} online`;
     }
   } catch {
-    // preserve server-rendered planned state on network or json errors
+    // preserve initial fallbacks or last good values on network/schema/JSON errors.
+  } finally {
+    clearTimeout(timeout);
+    setTimeout(updateServers, 30000);
   }
 }
 
-if (document.querySelector('[data-server-id]')) updateServers();
+if (document.querySelector('[data-server-id]')) {
+  updateServers(true);
+  if (document.querySelector('[data-island-wipe]')) setInterval(updateWipe, 1000);
+}
 
 // accept same-origin json only; never follow api redirects to login pages
 export async function api(path, { method = 'GET', body, token } = {}) {

@@ -6,6 +6,24 @@
     <h2 id="servers-heading">servers</h2>
     <ul class="server-list" aria-label="Servers" :loop="$page.custom.get('servers')">
       <li class="server-card" data-server-id="$loop.it.get('id')">
+        <ctx :if="$loop.it.get('id').eql('one-island')">
+          <p class="island-kicker">season 0</p>
+          <h3 :text="$loop.it.get('name')"></h3>
+          <p :text="$loop.it.get('description')"></p>
+          <a class="island-apply" href="/login">apply to join →</a>
+          <ul class="island-facts" aria-label="One Island facts">
+            <li>structures enabled</li>
+            <li>no land claims</li>
+            <li>minecraft 26.3</li>
+          </ul>
+          <dl class="island-metrics">
+            <div><dt>online</dt><dd data-island-online>—</dd></div>
+            <div><dt>uptime</dt><dd><a href="https://status.sccl.cc/endpoints/games_mine-skyblock-server" target="_blank" rel="noopener noreferrer" data-island-uptime>—</a></dd></div>
+            <div><dt>approved</dt><dd data-island-approved>—</dd></div>
+            <div><dt>since wipe</dt><dd data-island-wipe>—</dd></div>
+          </dl>
+        </ctx>
+        <ctx :if="$loop.it.get('id').eql('draumur1')">
         <h3 :text="$loop.it.get('name')"></h3>
         <p :text="$loop.it.get('description')"></p>
         <dl>
@@ -16,6 +34,7 @@
             <dd><span class="server-status" data-server-status>planned</span><br><span data-server-online>off / not launched</span></dd>
           </div>
         </dl>
+        </ctx>
       </li>
     </ul>
   </section>

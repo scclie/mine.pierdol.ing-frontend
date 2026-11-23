@@ -9,7 +9,7 @@
         .{
             .id = "one-island",
             .name = "one island",
-            .description = "vanilla skyblock, where all players survive on one island",
+            .description = "vanilla skyblock where every player survives on one shared island.",
             .version = "26.3",
         },
         .{
