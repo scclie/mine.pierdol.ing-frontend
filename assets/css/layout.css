@@ -211,6 +211,19 @@ dd {
   outline-offset: 3px;
 }
 
+[data-server-id="one-island"] .island-address {
+  margin: 1rem 0;
+  font-size: 0.875rem;
+}
+
+[data-server-id="one-island"] .island-address code {
+  padding: 0.35rem 0.6rem;
+  border: 0;
+  background: var(--nord0);
+  color: var(--nord8);
+  overflow-wrap: anywhere;
+}
+
 [data-server-id="one-island"] .island-facts {
   display: flex;
   flex-wrap: wrap;

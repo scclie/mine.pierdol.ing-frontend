@@ -13,12 +13,13 @@
           <h3 :text="$loop.it.get('name')"></h3>
           <p :text="$loop.it.get('description')"></p>
           <a class="island-apply" href="/account">apply to join -></a>
+          <p class="island-address">ip: <code>sb.pierdol.ing</code></p>
           <ul class="island-facts" aria-label="facts">
             <li>minecraft 26.3</li>
             <li>licensed & cracked login</li>
             <li>structures enabled</li>
-            <li>without privates</li>
-            <li>voice chat</li>
+            <li>w/o privates</li>
+            <li>simple voice chat</li>
           </ul>
           <section class="island-discord" aria-labelledby="island-discord-title">
             <h4 id="island-discord-title">discord</h4>
