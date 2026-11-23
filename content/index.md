@@ -1,6 +1,6 @@
 ---
 .title = "mine.pierdol.ing",
-.description = "Minecraft servers on laeradr: availability and project access.",
+.description = "очередной приватный сервер майнкрафт, строящийся вокруг желаний игроков, с бесплатно открытыми заявками для всех.",
 .date = .date("2026-11-09T00:00:00"),
 .layout = "index.shtml",
 .custom = .{

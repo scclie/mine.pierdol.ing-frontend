@@ -5,6 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title :text="$page.title"></title>
   <meta name="description" content="$page.description">
+  <link rel="icon" type="image/png" sizes="24x24" href="$site.asset('images/favicon.png').link()">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="mine.pierdol.ing">
+  <meta property="og:title" content="$page.title">
+  <meta property="og:description" content="$page.description">
+  <meta property="og:image" content="https://mine.pierdol.ing/images/logo.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="240">
+  <meta property="og:image:height" content="240">
+  <meta property="og:image:alt" content="mine.pierdol.ing">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="$page.title">
+  <meta name="twitter:description" content="$page.description">
+  <meta name="twitter:image" content="https://mine.pierdol.ing/images/logo.png">
+  <meta name="twitter:image:alt" content="Логотип mine.pierdol.ing">
   <link rel="stylesheet" href="$site.asset('css/theme.css').link()">
   <link rel="stylesheet" href="$site.asset('css/layout.css').link()">
 </head>
