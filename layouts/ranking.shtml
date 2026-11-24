@@ -1,0 +1,23 @@
+<extend template="base.shtml">
+<main id="content">
+  <section class="ranking" lang="ru" data-ranking aria-busy="true">
+    <h1 :text="$page.title"></h1>
+    <div :html="$page.content()"></div>
+    <noscript><p>TURN ON JAVASCRIPT FOR SEE THIS PAGE!!!.</p></noscript>
+    <p role="status" data-ranking-status>loading…</p>
+    <p role="alert" data-ranking-error hidden></p>
+    <div class="ranking-table-wrap" data-ranking-table hidden>
+      <table>
+        <thead><tr><th scope="col">#</th><th scope="col">nickname</th><th scope="col">playtime</th></tr></thead>
+        <tbody data-ranking-body></tbody>
+      </table>
+    </div>
+    <p data-ranking-empty hidden>no players in this rating</p>
+    <nav class="ranking-pager" aria-label="Страницы рейтинга">
+      <button type="button" data-ranking-prev aria-disabled="true">[ back ]</button>
+      <span data-ranking-page>error while loading</span>
+      <button type="button" data-ranking-next aria-disabled="true">[ next ]</button>
+    </nav>
+  </section>
+  <script type="module" src="$site.asset('js/ranking.js').link()"></script>
+</main>

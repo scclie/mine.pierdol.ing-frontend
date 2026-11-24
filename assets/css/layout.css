@@ -358,6 +358,26 @@ dd {
 .wiki-document :is(img, video) { display: block; max-width: 100%; height: auto; margin-block: 1rem; }
 .wiki-document pre { max-width: 100%; overflow-x: auto; }
 
+.ranking { min-width: 0; }
+.ranking [hidden] { display: none !important; }
+.ranking .ranking-table-wrap { max-width: 100%; overflow-x: auto; }
+.ranking table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.ranking caption { text-align: left; color: var(--nord4); font-size: 0.875rem; margin-bottom: 0.75rem; }
+.ranking :is(th, td) { padding: 0.5rem 0.35rem; text-align: left; border-bottom: 1px solid var(--nord3); overflow-wrap: anywhere; }
+.ranking th { color: var(--nord8); }
+.ranking :is(th, td):first-child { width: 5ch; font-variant-numeric: tabular-nums; }
+.ranking :is(th, td):last-child { width: 12ch; font-variant-numeric: tabular-nums; }
+.ranking .ranking-nickname--banned { text-decoration: line-through; }
+.ranking .ranking-banned-label { color: var(--nord13); font-size: 0.875rem; }
+.ranking [role="alert"] { color: var(--nord13); overflow-wrap: anywhere; }
+.ranking [role="status"] { color: var(--nord14); }
+.ranking .ranking-pager { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; margin-top: 1rem; }
+.ranking .ranking-pager span { font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.ranking button { font: inherit; color: var(--nord8); background: transparent; border: 1px solid var(--nord9); border-radius: 0; padding: 0.4rem; cursor: pointer; }
+.ranking button[aria-disabled="true"] { opacity: 0.55; cursor: not-allowed; }
+.ranking button:hover:not([aria-disabled="true"]) { background: var(--nord8); color: var(--nord0); }
+.ranking button:focus-visible { outline: 2px solid var(--nord8); outline-offset: 3px; }
+
 .skip-link {
   position: absolute;
   z-index: 2;

@@ -54,7 +54,7 @@ test('Zine publishes each new asset once and staging copies ascii without changi
   const build = await read('scripts/build.mjs');
   assert.match(build, /for \(const directory of \['css', 'js', 'ascii', 'images'\]\)/);
   assert.match(build, /await cp\(join\(root, 'assets', directory\), join\(stage, 'assets', directory\), \{ recursive: true \}\)/);
-  assert.match(build, /for \(const page of \['index', 'rules', 'login'\]\)/);
+  assert.match(build, /for \(const page of \['index', 'rules', 'login', 'wiki', 'ranking'\]\)/);
   assert.match(build, /await cp\(join\(root, `content\/\$\{page\}\.md`\), join\(stage, `content\/\$\{page\}\.smd`\)\)/);
 });
 
