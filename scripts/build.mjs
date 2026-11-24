@@ -20,7 +20,7 @@ try {
   await mkdir(join(stage, 'content'), { recursive: true });
   await mkdir(join(stage, 'layouts/templates'), { recursive: true });
   await cp(join(root, 'zine.ziggy'), join(stage, 'zine.ziggy'));
-  for (const page of ['index', 'rules', 'login']) {
+  for (const page of ['index', 'rules', 'login', 'wiki']) {
     await cp(join(root, `content/${page}.md`), join(stage, `content/${page}.smd`));
     await cp(join(root, `layouts/${page}.shtml`), join(stage, `layouts/${page}.shtml`));
   }

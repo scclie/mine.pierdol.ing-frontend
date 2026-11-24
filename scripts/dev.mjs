@@ -29,6 +29,7 @@ const contentTypes = {
   '.png': 'image/png',
   '.ico': 'image/x-icon',
   '.webp': 'image/webp',
+  '.gif': 'image/gif',
 };
 
 function isWithinPublic(path) {

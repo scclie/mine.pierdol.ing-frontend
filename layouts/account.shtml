@@ -7,6 +7,7 @@
     <p role="status" data-notice></p>
     <div data-account hidden>
       <p>signed in as <span data-discord-identity></span></p>
+      <p lang="ru">Наиграно: <span data-active-playtime></span></p>
       <dl>
         <div><dt>state</dt><dd><span class="application-status" data-account-state></span></dd></div>
         <div data-nickname-row hidden><dt>nickname</dt><dd data-nickname></dd></div>

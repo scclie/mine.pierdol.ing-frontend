@@ -1,0 +1,11 @@
+<extend template="base.shtml">
+<main id="content">
+  <h1 :text="$page.title"></h1>
+  <div class="wiki-layout">
+    <nav class="wiki-toc" aria-label="Разделы wiki" data-wiki-toc hidden>
+      <ul></ul>
+    </nav>
+    <article class="wiki-document" lang="ru" data-wiki-document :html="$page.content()"></article>
+  </div>
+  <script type="module" src="$site.asset('js/wiki.js').link()"></script>
+</main>

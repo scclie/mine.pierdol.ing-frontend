@@ -329,6 +329,35 @@ dd {
   color: var(--nord13);
 }
 
+.wiki-layout {
+  display: grid;
+  grid-template-columns: 13rem minmax(0, 1fr);
+  align-items: start;
+  gap: 2rem;
+}
+
+.wiki-toc {
+  position: sticky;
+  top: 1rem;
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
+  padding-right: 1rem;
+  font-size: 0.875rem;
+}
+
+.wiki-toc[hidden] { display: none; }
+.wiki-toc-title { color: var(--nord5); }
+.wiki-toc ul { list-style: none; margin: 0; padding: 0; }
+.wiki-toc li + li { margin-top: 0.75rem; }
+.wiki-toc a { display: block; overflow-wrap: anywhere; }
+.wiki-toc-subsection { padding-left: 1rem; }
+.wiki-document { min-width: 0; overflow-wrap: anywhere; }
+.wiki-document h2 { color: var(--nord13); }
+.wiki-document :is(h2, h3) { scroll-margin-top: 1.5rem; }
+.wiki-document h3 { margin-top: 1.5rem; }
+.wiki-document :is(img, video) { display: block; max-width: 100%; height: auto; margin-block: 1rem; }
+.wiki-document pre { max-width: 100%; overflow-x: auto; }
+
 .skip-link {
   position: absolute;
   z-index: 2;
@@ -388,6 +417,15 @@ dd {
 .workflow [data-card] h3 { margin-top: 2rem; }
 
 @media (max-width: 767px) {
+  .wiki-layout { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+  .wiki-toc {
+    position: static;
+    max-height: none;
+    padding: 0 0 1rem;
+    border-right: 0;
+    border-bottom: 1px solid var(--nord9);
+  }
+
   html {
     font-size: 14px;
   }

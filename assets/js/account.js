@@ -17,6 +17,8 @@ function render(payload) {
   if (!payload) throw new Error('account lookup failed');
   account = payload;
   root.hidden = false;
+  const minutes = account.active_minutes;
+  document.querySelector('[data-active-playtime]').textContent = `${Math.floor(minutes / 60)} h ${minutes % 60} min`;
   const username = account.user.discord_username;
   document.querySelector('[data-discord-identity]').textContent = username
     ? `@${username} (${account.user.discord_id})`
