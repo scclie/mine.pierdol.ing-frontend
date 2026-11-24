@@ -38,7 +38,6 @@ function validateRanking(payload, requestedPage) {
 const root = document.querySelector('[data-ranking]');
 if (root) {
   const find = (name) => root.querySelector(`[data-ranking-${name}]`);
-  const status = find('status');
   const error = find('error');
   const table = find('table');
   const body = find('body');
@@ -62,7 +61,7 @@ if (root) {
   function setPager(loading, failedPage = null) {
     const payload = lastSuccessful;
     pageLabel.textContent = payload
-      ? `page ${payload.page}/${payload.total_pages} players: ${payload.total_players}`
+      ? `page ${payload.page}/${payload.total_pages}`
       : `page ${failedPage || readPage(new URL(window.location.href))} loading error ;/`;
     previousPage = payload && payload.page > 1 ? payload.page - 1 : null;
     nextPage = payload && payload.page < payload.total_pages ? payload.page + 1 : null;
@@ -118,7 +117,6 @@ if (root) {
     else window.history.replaceState(null, '', pageUrl(page));
     root.setAttribute('aria-busy', 'true');
     error.hidden = true;
-    status.textContent = `loading ${page}…${lastSuccessful ? ` page ${lastSuccessful.page}.` : ''}`;
     setPager(true);
     let failed = false;
     const timeout = window.setTimeout(() => currentController.abort(), 10000);
@@ -133,11 +131,9 @@ if (root) {
       lastSuccessful = payload;
       renderRanking(payload);
       if (payload.page !== page) window.history.replaceState(null, '', pageUrl(payload.page));
-      // status.textContent = payload.players.length === 0 ? 'list empty.' : `loaded ${payload.page}.`;
     } catch (cause) {
       if (id !== requestId) return;
       failed = true;
-      status.textContent = '';
       error.textContent = `error while loading page ${page}.${cause.name === 'AbortError' ? ' timeout ;/' : ''} ${lastSuccessful ? `page ${lastSuccessful.page}.` : 'data load error'} u can retry ;k.`;
       error.hidden = false;
     } finally {
