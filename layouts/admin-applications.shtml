@@ -3,7 +3,7 @@
   <section class="workflow" aria-labelledby="admin-title">
     <h1 id="admin-title">applications</h1>
     <p><a href="/account">account</a> / moderation queue</p>
-    <noscript><p>javascript is required for secure moderation controls.</p></noscript>
+    <noscript><p>TURN ON JAVASCRIPT FOR SEE THIS PAGE!!!</p></noscript>
     <p role="alert" data-error></p>
     <p role="status" data-notice></p>
     <div data-admin hidden>
@@ -60,7 +60,6 @@
         </select>
         <label for="edit-reason">change reason</label>
         <textarea id="edit-reason" name="reason" rows="3" maxlength="2000" aria-describedby="edit-help"></textarea>
-        <p class="field-help" id="edit-help">required for bans and rejections. only changed fields are sent; the api validates transitions.</p>
         <button type="submit">save changes</button>
       </form>
     </template>

@@ -12,7 +12,7 @@
           <p class="island-kicker">season 0</p>
           <h3 :text="$loop.it.get('name')"></h3>
           <p :text="$loop.it.get('description')"></p>
-          <a class="island-apply" href="/account">apply to join -></a>
+          <a class="island-apply" href="/account">подать заявку ->></a>
           <p class="island-address">ip: <code>sb.pierdol.ing</code></p>
           <ul class="island-facts" aria-label="facts">
             <li>minecraft 26.3</li>
@@ -24,7 +24,7 @@
           <section class="island-discord" aria-labelledby="island-discord-title">
             <h4 id="island-discord-title">discord</h4>
             <p><span data-island-discord-online>—</span> online | <span data-island-discord-members>—</span> members</p>
-            <a class="island-discord-join" href="https://discord.com/invite/MNXnGGG3zt" target="_blank" rel="noopener noreferrer">join server -&gt;</a>
+            <a class="island-discord-join" href="https://discord.com/invite/MNXnGGG3zt" target="_blank" rel="noopener noreferrer">зайти на сервер -></a>
           </section>
             </div>
             <img class="island-image" src="$site.asset('images/one-island.png').link()" width="1280" height="1280" alt="ascii">

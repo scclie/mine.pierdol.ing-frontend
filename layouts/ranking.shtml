@@ -3,7 +3,7 @@
   <section class="ranking" lang="ru" data-ranking aria-busy="true">
     <h1 :text="$page.title"></h1>
     <div :html="$page.content()"></div>
-    <noscript><p>TURN ON JAVASCRIPT FOR SEE THIS PAGE!!!.</p></noscript>
+    <noscript><p>TURN ON JAVASCRIPT FOR THIS PAGE!!!</p></noscript>
     <p role="alert" data-ranking-error hidden></p>
     <div class="ranking-table-wrap" data-ranking-table hidden>
       <table>
